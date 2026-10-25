@@ -1,9 +1,10 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-10-25T15:32:38.180Z",
+  "checked_at": "2026-10-25T15:36:10.091Z",
   "code_integrity": true,
+  "check_environment": "github_actions",
   "catalog_valid": true,
-  "video_checks_passed": true,
+  "video_checks_passed": false,
   "channels": [
     {
       "id": "henan-satellite",
@@ -14,8 +15,8 @@
           "resolver": "dxxw",
           "id": 145,
           "ok": true,
-          "checked_at": "2026-10-25T15:32:30.126Z",
-          "milliseconds": 6501,
+          "checked_at": "2026-10-25T15:35:48.572Z",
+          "milliseconds": 5589,
           "media_sequence_advanced": true,
           "sample_bytes": 65536
         }
@@ -34,8 +35,8 @@
           "resolver": "dxxw",
           "id": 141,
           "ok": true,
-          "checked_at": "2026-10-25T15:32:27.113Z",
-          "milliseconds": 3420,
+          "checked_at": "2026-10-25T15:35:48.106Z",
+          "milliseconds": 5086,
           "media_sequence_advanced": true,
           "sample_bytes": 65536
         }
@@ -54,8 +55,8 @@
           "resolver": "dxxw",
           "id": 146,
           "ok": true,
-          "checked_at": "2026-10-25T15:32:30.124Z",
-          "milliseconds": 6430,
+          "checked_at": "2026-10-25T15:35:48.554Z",
+          "milliseconds": 5529,
           "media_sequence_advanced": true,
           "sample_bytes": 65536
         }
@@ -74,23 +75,23 @@
           "resolver": "dxxw",
           "id": 197,
           "ok": true,
-          "checked_at": "2026-10-25T15:32:33.549Z",
-          "milliseconds": 6434,
+          "checked_at": "2026-10-25T15:35:58.658Z",
+          "milliseconds": 10547,
           "media_sequence_advanced": true,
           "sample_bytes": 65536
         },
         {
           "resolver": "zzbrtv",
           "id": 100714,
-          "ok": true,
-          "checked_at": "2026-10-25T15:32:35.268Z",
-          "milliseconds": 8153,
-          "media_sequence_advanced": true,
-          "sample_bytes": 65536
+          "ok": false,
+          "checked_at": "2026-10-25T15:36:10.090Z",
+          "stage": "official_directory",
+          "reason": "network_error",
+          "milliseconds": 21978
         }
       ],
       "ok": true,
-      "all_lines_ok": true,
+      "all_lines_ok": false,
       "resolution": "1920x1080; backup 1280x720",
       "resolution_evidence": "household PC decode; cloud sample does not verify resolution"
     },
@@ -102,28 +103,28 @@
         {
           "resolver": "zzbrtv",
           "id": 107447,
-          "ok": true,
-          "checked_at": "2026-10-25T15:32:38.180Z",
-          "milliseconds": 8056,
-          "media_sequence_advanced": true,
-          "sample_bytes": 65536
+          "ok": false,
+          "checked_at": "2026-10-25T15:36:10.090Z",
+          "stage": "official_directory",
+          "reason": "network_error",
+          "milliseconds": 21536
         }
       ],
-      "ok": true,
-      "all_lines_ok": true,
+      "ok": false,
+      "all_lines_ok": false,
       "resolution": "1280x720",
       "resolution_evidence": "household PC decode; cloud sample does not verify resolution"
     }
   ],
-  "all_checks_passed": true,
+  "all_checks_passed": false,
   "limitations": "Small HTTP media samples from the runner. Not television, sound, 30-minute, or household acceptance.",
   "publication": {
-    "updated_at": "2026-10-25T23:33:15.092327+08:00",
+    "updated_at": "2026-10-25T23:36:10.163338+08:00",
     "updated": true,
     "kept_previous_files": false,
     "epg_updated": true,
-    "channel_config_kept": false,
-    "channels_sha256": "38d7cba594910e149dbbc3995ce4a2e45236d7b6e6cc1da1afd8b37339c76cfc"
+    "channel_config_kept": true,
+    "reason": "video_checks_failed; unchanged_channels_valid_guide_refreshed"
   },
   "epg": {
     "ok": true,
@@ -140,7 +141,6 @@
       "郑州都市生活"
     ],
     "rejected_invalid_entries": 9,
-    "sha256": "1c07b1a2e391f71efdaa0e46c676919b9a0071dd093e2461c5f62c8bf9710e7f"
-  },
-  "check_environment": "local_cli"
+    "sha256": "3c35921b98ee4df4d6103b26c730b8e2623d312be20f987fae56a29730d8c0eb"
+  }
 }

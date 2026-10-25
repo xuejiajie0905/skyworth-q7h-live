@@ -208,5 +208,5 @@ const health = { schema_version: 1, checked_at: new Date().toISOString(), code_i
   video_checks_passed: codeIntegrity && schemaValid && channels.filter(c => c.required)
     .every(c => c.lines.some(line => line.ok && line.check_kind === 'live_media_sample')),
   channels, all_checks_passed: false,
-  limitations: 'Direct streams: small HTTP media samples. WebView: official page response only, no current live-media verification. Prior device evidence is explicitly dated. Not current television, sound, 30-minute, or household acceptance.' };
+  limitations: 'Direct streams: small HTTP media samples. WebView: official page response only, no current live-media verification. Prior device evidence is explicitly dated. Not current television, sound, sustained-viewing, or household acceptance.' };
 await writeFile(path.join(root, 'health.json'), JSON.stringify(health, null, 2) + '\n');

@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "channels": [
+    {
+      "id": "henan-satellite",
+      "name": "河南卫视",
+      "group": "河南郑州",
+      "required": true,
+      "epg_upstream_id": "河南卫视高清",
+      "resolution": "1920x1080",
+      "lines": [
+        {
+          "resolver": "dxxw",
+          "id": 145
+        }
+      ]
+    },
+    {
+      "id": "henan-urban",
+      "name": "河南都市",
+      "group": "河南郑州",
+      "required": true,
+      "epg_upstream_id": "277",
+      "resolution": "1920x1080",
+      "lines": [
+        {
+          "resolver": "dxxw",
+          "id": 141
+        }
+      ]
+    },
+    {
+      "id": "henan-minsheng",
+      "name": "河南民生",
+      "group": "河南郑州",
+      "required": true,
+      "epg_upstream_id": "274",
+      "resolution": "1920x1080",
+      "lines": [
+        {
+          "resolver": "dxxw",
+          "id": 146
+        }
+      ]
+    },
+    {
+      "id": "zhengzhou-news",
+      "name": "郑州新闻综合",
+      "group": "河南郑州",
+      "required": true,
+      "epg_upstream_id": null,
+      "resolution": "1920x1080; backup 1280x720",
+      "lines": [
+        {
+          "resolver": "dxxw",
+          "id": 197
+        },
+        {
+          "resolver": "zzbrtv",
+          "id": 100714
+        }
+      ]
+    },
+    {
+      "id": "zhengzhou-urban",
+      "name": "郑州都市生活",
+      "group": "河南郑州",
+      "required": true,
+      "epg_upstream_id": null,
+      "resolution": "1280x720",
+      "lines": [
+        {
+          "resolver": "zzbrtv",
+          "id": 107447
+        }
+      ]
+    }
+  ]
+}

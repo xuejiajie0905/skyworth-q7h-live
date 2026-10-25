@@ -1,0 +1,13 @@
+#EXTM3U x-tvg-url="https://raw.githubusercontent.com/xuejiajie0905/skyworth-q7h-live/main/epg.xml.gz"
+#EXTINF:-1 tvg-id="河南卫视" tvg-name="河南卫视" group-title="河南郑州",河南卫视
+javascript://https://raw.githubusercontent.com/xuejiajie0905/skyworth-q7h-live/dea5a67ec696a01d707508790b86a268ecadbf8b/scripts/dxxw-v1.js?id=145
+#EXTINF:-1 tvg-id="河南都市" tvg-name="河南都市" group-title="河南郑州",河南都市
+javascript://https://raw.githubusercontent.com/xuejiajie0905/skyworth-q7h-live/dea5a67ec696a01d707508790b86a268ecadbf8b/scripts/dxxw-v1.js?id=141
+#EXTINF:-1 tvg-id="河南民生" tvg-name="河南民生" group-title="河南郑州",河南民生
+javascript://https://raw.githubusercontent.com/xuejiajie0905/skyworth-q7h-live/dea5a67ec696a01d707508790b86a268ecadbf8b/scripts/dxxw-v1.js?id=146
+#EXTINF:-1 tvg-id="郑州新闻综合" tvg-name="郑州新闻综合" group-title="河南郑州",郑州新闻综合
+javascript://https://raw.githubusercontent.com/xuejiajie0905/skyworth-q7h-live/dea5a67ec696a01d707508790b86a268ecadbf8b/scripts/dxxw-v1.js?id=197
+#EXTINF:-1 tvg-id="郑州新闻综合" tvg-name="郑州新闻综合" group-title="河南郑州",郑州新闻综合
+javascript://https://raw.githubusercontent.com/xuejiajie0905/skyworth-q7h-live/dea5a67ec696a01d707508790b86a268ecadbf8b/scripts/zzbrtv-v1.js?id=100714
+#EXTINF:-1 tvg-id="郑州都市生活" tvg-name="郑州都市生活" group-title="河南郑州",郑州都市生活
+javascript://https://raw.githubusercontent.com/xuejiajie0905/skyworth-q7h-live/dea5a67ec696a01d707508790b86a268ecadbf8b/scripts/zzbrtv-v1.js?id=107447

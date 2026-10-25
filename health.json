@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-10-25T15:12:11.299Z",
+  "code_integrity": true,
+  "catalog_valid": true,
+  "video_checks_passed": true,
+  "channels": [
+    {
+      "id": "henan-satellite",
+      "name": "河南卫视",
+      "required": true,
+      "lines": [
+        {
+          "resolver": "dxxw",
+          "id": 145,
+          "ok": true,
+          "checked_at": "2026-10-25T15:12:06.199Z",
+          "milliseconds": 6508,
+          "media_sequence_advanced": true,
+          "sample_bytes": 65536
+        }
+      ],
+      "ok": true,
+      "all_lines_ok": true,
+      "resolution": "1920x1080",
+      "resolution_evidence": "household PC decode; cloud sample does not verify resolution"
+    },
+    {
+      "id": "henan-urban",
+      "name": "河南都市",
+      "required": true,
+      "lines": [
+        {
+          "resolver": "dxxw",
+          "id": 141,
+          "ok": true,
+          "checked_at": "2026-10-25T15:12:03.199Z",
+          "milliseconds": 3440,
+          "media_sequence_advanced": true,
+          "sample_bytes": 65536
+        }
+      ],
+      "ok": true,
+      "all_lines_ok": true,
+      "resolution": "1920x1080",
+      "resolution_evidence": "household PC decode; cloud sample does not verify resolution"
+    },
+    {
+      "id": "henan-minsheng",
+      "name": "河南民生",
+      "required": true,
+      "lines": [
+        {
+          "resolver": "dxxw",
+          "id": 146,
+          "ok": true,
+          "checked_at": "2026-10-25T15:12:03.195Z",
+          "milliseconds": 3437,
+          "media_sequence_advanced": true,
+          "sample_bytes": 65536
+        }
+      ],
+      "ok": true,
+      "all_lines_ok": true,
+      "resolution": "1920x1080",
+      "resolution_evidence": "household PC decode; cloud sample does not verify resolution"
+    },
+    {
+      "id": "zhengzhou-news",
+      "name": "郑州新闻综合",
+      "required": true,
+      "lines": [
+        {
+          "resolver": "dxxw",
+          "id": 197,
+          "ok": true,
+          "checked_at": "2026-10-25T15:12:09.472Z",
+          "milliseconds": 6276,
+          "media_sequence_advanced": true,
+          "sample_bytes": 65536
+        },
+        {
+          "resolver": "zzbrtv",
+          "id": 100714,
+          "ok": true,
+          "checked_at": "2026-10-25T15:12:11.298Z",
+          "milliseconds": 8101,
+          "media_sequence_advanced": true,
+          "sample_bytes": 65536
+        }
+      ],
+      "ok": true,
+      "all_lines_ok": true,
+      "resolution": "1920x1080; backup 1280x720",
+      "resolution_evidence": "household PC decode; cloud sample does not verify resolution"
+    },
+    {
+      "id": "zhengzhou-urban",
+      "name": "郑州都市生活",
+      "required": true,
+      "lines": [
+        {
+          "resolver": "zzbrtv",
+          "id": 107447,
+          "ok": true,
+          "checked_at": "2026-10-25T15:12:11.299Z",
+          "milliseconds": 8100,
+          "media_sequence_advanced": true,
+          "sample_bytes": 65536
+        }
+      ],
+      "ok": true,
+      "all_lines_ok": true,
+      "resolution": "1280x720",
+      "resolution_evidence": "household PC decode; cloud sample does not verify resolution"
+    }
+  ],
+  "all_checks_passed": true,
+  "limitations": "Small HTTP media samples from the runner. Not television, sound, 30-minute, or household acceptance.",
+  "publication": {
+    "updated_at": "2026-10-25T23:12:31.664315+08:00",
+    "updated": true,
+    "kept_previous_files": false,
+    "channels_sha256": "42ce6365159b5a8de2e3083f4fae355b7a374f0a5bd5f5cda8ed9a68fc1a8075"
+  },
+  "epg": {
+    "ok": true,
+    "upstream": "https://raw.githubusercontent.com/mytv-android/myEPG/master/output/epg.gz",
+    "exact_match_counts": {
+      "河南卫视": 91,
+      "河南都市": 29,
+      "河南民生": 28,
+      "郑州新闻综合": 0,
+      "郑州都市生活": 0
+    },
+    "explicit_no_data_channels": [
+      "郑州新闻综合",
+      "郑州都市生活"
+    ],
+    "rejected_invalid_entries": 9,
+    "sha256": "b41621f9ba12b0d7e1e6d492f43ba0fe8968995ff3f200a7f9873a27bc3860e4"
+  }
+}

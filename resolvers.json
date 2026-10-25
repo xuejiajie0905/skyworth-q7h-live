@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "resolvers": {
+    "dxxw": {
+      "file": "scripts/dxxw-v1.js",
+      "git_ref": "dea5a67ec696a01d707508790b86a268ecadbf8b",
+      "sha256": "f7dd8cf40ab31ce9a7d9b3201e1ab22219177d1d6c87847eafc99de44fb8ff4c"
+    },
+    "zzbrtv": {
+      "file": "scripts/zzbrtv-v1.js",
+      "git_ref": "dea5a67ec696a01d707508790b86a268ecadbf8b",
+      "sha256": "d794fcf1a043348252a636f07e788a642a9d06ab28effdd5a096e64cdce7162c"
+    },
+    "cctvnews": {
+      "file": "scripts/cctvnews-v1.js",
+      "git_ref": "dea5a67ec696a01d707508790b86a268ecadbf8b",
+      "sha256": "07fb1359e8066ddfdb8dbe67ed82ffe853b38c2d568c052f70ebf308984a9fe8"
+    }
+  }
+}

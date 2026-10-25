@@ -1,0 +1,47 @@
+name: Check channels and update guide
+
+on:
+  schedule:
+    - cron: '10 23,11 * * *' # Beijing 07:10 and 19:10; scheduler may be delayed
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'catalog.json'
+      - 'resolvers.json'
+      - 'scripts/**'
+      - 'maintenance/**'
+      - '.github/workflows/maintain.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: channel-maintenance
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Read this repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4, verified 2026-10-25
+      - name: Check pinned code and live media samples
+        run: node maintenance/check.mjs
+      - name: Filter XMLTV and retain last good files on failure
+        run: python3 maintenance/publish.py
+      - name: Save health and eligible data
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add health.json
+          for item in channels.m3u epg.xml.gz; do
+            if test -f "$item"; then git add "$item"; fi
+          done
+          if ! git diff --cached --quiet; then
+            git commit -m 'Update checked channel health and guide'
+            git push
+          fi
+      - name: Report failed checks
+        run: python3 -c "import json,sys; sys.exit(0 if json.load(open('health.json'))['all_checks_passed'] else 1)"

@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-10-25T15:14:58.100Z",
+  "checked_at": "2026-10-25T15:32:38.180Z",
   "code_integrity": true,
   "catalog_valid": true,
-  "video_checks_passed": false,
+  "video_checks_passed": true,
   "channels": [
     {
       "id": "henan-satellite",
@@ -14,8 +14,8 @@
           "resolver": "dxxw",
           "id": 145,
           "ok": true,
-          "checked_at": "2026-10-25T15:14:36.190Z",
-          "milliseconds": 6146,
+          "checked_at": "2026-10-25T15:32:30.126Z",
+          "milliseconds": 6501,
           "media_sequence_advanced": true,
           "sample_bytes": 65536
         }
@@ -34,8 +34,8 @@
           "resolver": "dxxw",
           "id": 141,
           "ok": true,
-          "checked_at": "2026-10-25T15:14:36.165Z",
-          "milliseconds": 6068,
+          "checked_at": "2026-10-25T15:32:27.113Z",
+          "milliseconds": 3420,
           "media_sequence_advanced": true,
           "sample_bytes": 65536
         }
@@ -54,8 +54,8 @@
           "resolver": "dxxw",
           "id": 146,
           "ok": true,
-          "checked_at": "2026-10-25T15:14:36.176Z",
-          "milliseconds": 6074,
+          "checked_at": "2026-10-25T15:32:30.124Z",
+          "milliseconds": 6430,
           "media_sequence_advanced": true,
           "sample_bytes": 65536
         }
@@ -74,22 +74,23 @@
           "resolver": "dxxw",
           "id": 197,
           "ok": true,
-          "checked_at": "2026-10-25T15:14:41.247Z",
-          "milliseconds": 5077,
+          "checked_at": "2026-10-25T15:32:33.549Z",
+          "milliseconds": 6434,
           "media_sequence_advanced": true,
           "sample_bytes": 65536
         },
         {
           "resolver": "zzbrtv",
           "id": 100714,
-          "ok": false,
-          "checked_at": "2026-10-25T15:14:58.100Z",
-          "reason": "network_error",
-          "milliseconds": 21929
+          "ok": true,
+          "checked_at": "2026-10-25T15:32:35.268Z",
+          "milliseconds": 8153,
+          "media_sequence_advanced": true,
+          "sample_bytes": 65536
         }
       ],
       "ok": true,
-      "all_lines_ok": false,
+      "all_lines_ok": true,
       "resolution": "1920x1080; backup 1280x720",
       "resolution_evidence": "household PC decode; cloud sample does not verify resolution"
     },
@@ -101,33 +102,36 @@
         {
           "resolver": "zzbrtv",
           "id": 107447,
-          "ok": false,
-          "checked_at": "2026-10-25T15:14:58.100Z",
-          "reason": "network_error",
-          "milliseconds": 21924
+          "ok": true,
+          "checked_at": "2026-10-25T15:32:38.180Z",
+          "milliseconds": 8056,
+          "media_sequence_advanced": true,
+          "sample_bytes": 65536
         }
       ],
-      "ok": false,
-      "all_lines_ok": false,
+      "ok": true,
+      "all_lines_ok": true,
       "resolution": "1280x720",
       "resolution_evidence": "household PC decode; cloud sample does not verify resolution"
     }
   ],
-  "all_checks_passed": false,
+  "all_checks_passed": true,
   "limitations": "Small HTTP media samples from the runner. Not television, sound, 30-minute, or household acceptance.",
   "publication": {
-    "updated_at": "2026-10-25T23:14:58.181389+08:00",
-    "updated": false,
-    "kept_previous_files": true,
-    "reason": "video_checks_failed"
+    "updated_at": "2026-10-25T23:33:15.092327+08:00",
+    "updated": true,
+    "kept_previous_files": false,
+    "epg_updated": true,
+    "channel_config_kept": false,
+    "channels_sha256": "38d7cba594910e149dbbc3995ce4a2e45236d7b6e6cc1da1afd8b37339c76cfc"
   },
   "epg": {
     "ok": true,
     "upstream": "https://raw.githubusercontent.com/mytv-android/myEPG/master/output/epg.gz",
     "exact_match_counts": {
-      "河南卫视": 91,
+      "河南卫视": 90,
       "河南都市": 29,
-      "河南民生": 28,
+      "河南民生": 27,
       "郑州新闻综合": 0,
       "郑州都市生活": 0
     },
@@ -136,6 +140,7 @@
       "郑州都市生活"
     ],
     "rejected_invalid_entries": 9,
-    "sha256": "cf5bc6efffa59c5ebe30b20eae1068504e1d124909f140aa58d6f3a8773a542e"
-  }
+    "sha256": "1c07b1a2e391f71efdaa0e46c676919b9a0071dd093e2461c5f62c8bf9710e7f"
+  },
+  "check_environment": "local_cli"
 }

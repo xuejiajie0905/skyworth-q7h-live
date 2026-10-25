@@ -7,14 +7,14 @@
       "sha256": "f7dd8cf40ab31ce9a7d9b3201e1ab22219177d1d6c87847eafc99de44fb8ff4c"
     },
     "zzbrtv": {
-      "file": "scripts/zzbrtv-v1.js",
-      "git_ref": "dea5a67ec696a01d707508790b86a268ecadbf8b",
-      "sha256": "d794fcf1a043348252a636f07e788a642a9d06ab28effdd5a096e64cdce7162c"
+      "file": "scripts/zzbrtv-v2.js",
+      "git_ref": "f147d7622511a1cc8927bf983b31a06128cd7bf8",
+      "sha256": "acea1805e40a4f08408fac245690fac1d239a53b038d3b71176960576b61b6d4"
     },
     "cctvnews": {
-      "file": "scripts/cctvnews-v1.js",
-      "git_ref": "dea5a67ec696a01d707508790b86a268ecadbf8b",
-      "sha256": "07fb1359e8066ddfdb8dbe67ed82ffe853b38c2d568c052f70ebf308984a9fe8"
+      "file": "scripts/cctvnews-v2.js",
+      "git_ref": "f147d7622511a1cc8927bf983b31a06128cd7bf8",
+      "sha256": "dd7c5117d372276907ba3da9257326dd69657f8324a205847f4c108c2637fb3b"
     }
   }
 }

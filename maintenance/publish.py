@@ -17,7 +17,7 @@ RAW = 'https://raw.githubusercontent.com/xuejiajie0905/skyworth-q7h-live/'
 
 
 def save_json(path, data):
-    path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf-8',newline='\n')
 
 
 def stamp(value):
@@ -132,7 +132,8 @@ def main():
     catalog=json.loads((ROOT/'catalog.json').read_text(encoding='utf-8'))
     pins=json.loads((ROOT/'resolvers.json').read_text(encoding='utf-8'))
     now=dt.datetime.now(TZ)
-    health['publication']={'updated_at':now.isoformat(),'updated':False,'kept_previous_files':True}
+    health['publication']={'updated_at':now.isoformat(),'updated':False,'kept_previous_files':True,
+                           'epg_updated':False,'channel_config_kept':True}
     try:
         data,epg_status=guide(catalog,now)
         m3u=playlist(catalog,pins)
@@ -141,11 +142,21 @@ def main():
             (ROOT/'epg.xml.gz').write_bytes(data)
             (ROOT/'channels.m3u').write_text(m3u,encoding='utf-8',newline='\n')
             health['publication'].update({'updated':True,'kept_previous_files':False,
+                'epg_updated':True,'channel_config_kept':False,
                 'channels_sha256':hashlib.sha256(m3u.encode()).hexdigest()})
             health['all_checks_passed']=True
         else:
             health['publication']['reason']='video_checks_failed'
             health['all_checks_passed']=False
+            # Guide data has its own validation gate. If the exact installed
+            # channel configuration is unchanged, a runner's regional media
+            # failure must not freeze otherwise valid future programme data.
+            previous=ROOT/'channels.m3u'
+            if previous.exists() and previous.read_text(encoding='utf-8')==m3u:
+                (ROOT/'epg.xml.gz').write_bytes(data)
+                health['publication'].update({'updated':True,'kept_previous_files':False,
+                                               'epg_updated':True,'channel_config_kept':True,
+                                               'reason':'video_checks_failed; unchanged_channels_valid_guide_refreshed'})
     except Exception as exc:
         reason=str(exc) if isinstance(exc,ValueError) and str(exc).startswith('epg_') else type(exc).__name__
         health['epg']={'ok':False,'reason':reason}

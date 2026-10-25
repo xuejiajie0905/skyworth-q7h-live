@@ -125,17 +125,21 @@ async function mediaManifest(url, headers) {
 
 async function checkLine(line) {
   const started = Date.now();
+  let stage = 'official_directory';
   try {
     const resolvers = { dxxw, zzbrtv, cctvnews };
     if (!resolvers[line.resolver]) throw new CheckError('unknown_resolver');
     const media = await resolvers[line.resolver](line.id);
+    stage = 'live_manifest';
     const first = await mediaManifest(media.url, media.headers);
+    stage = 'media_sample';
     const segment = (await get(first.segment, media.headers, undefined, 65_536, true)).data;
     const ts = segment.length >= 564 && [0, 188, 376].every(i => segment[i] === 0x47);
     if (!ts) throw new CheckError('unexpected_segment_format');
     // Some official CDNs cache a short playlist for longer than one segment.
     // Observe multiple normal reloads before classifying a genuinely stale list.
     let advanced = false;
+    stage = 'manifest_reload';
     for (let attempt = 0; attempt < 4; attempt++) {
       await pause(Math.min(11, first.target + 1) * 1000);
       const second = await mediaManifest(first.url, media.headers);
@@ -146,7 +150,7 @@ async function checkLine(line) {
       milliseconds: Date.now() - started, media_sequence_advanced: true, sample_bytes: segment.length };
   } catch (error) {
     return { resolver: line.resolver, id: line.id, ok: false, checked_at: new Date().toISOString(),
-      reason: error instanceof CheckError ? error.code : 'unexpected_api_format', milliseconds: Date.now() - started };
+      stage, reason: error instanceof CheckError ? error.code : 'unexpected_api_format', milliseconds: Date.now() - started };
   }
 }
 
@@ -174,6 +178,7 @@ async function worker() {
 await Promise.all([worker(), worker(), worker()]);
 channels.sort((a, b) => ids.indexOf(a.id) - ids.indexOf(b.id));
 const health = { schema_version: 1, checked_at: new Date().toISOString(), code_integrity: codeIntegrity,
+  check_environment: process.env.GITHUB_ACTIONS === 'true' ? 'github_actions' : 'local_cli',
   catalog_valid: schemaValid, video_checks_passed: codeIntegrity && schemaValid && channels.filter(c => c.required).every(c => c.ok),
   channels, all_checks_passed: false,
   limitations: 'Small HTTP media samples from the runner. Not television, sound, 30-minute, or household acceptance.' };

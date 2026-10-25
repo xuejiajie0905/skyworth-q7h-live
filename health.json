@@ -1,10 +1,11 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-10-25T15:47:23.877Z",
+  "checked_at": "2026-10-25T16:46:22.055Z",
   "code_integrity": true,
-  "check_environment": "github_actions",
+  "check_environment": "local_cli",
   "catalog_valid": true,
-  "video_checks_passed": false,
+  "subscription_checks_passed": true,
+  "video_checks_passed": true,
   "channels": [
     {
       "id": "henan-satellite",
@@ -15,8 +16,10 @@
           "resolver": "dxxw",
           "id": 145,
           "ok": true,
-          "checked_at": "2026-10-25T15:47:04.909Z",
-          "milliseconds": 8227,
+          "check_kind": "live_media_sample",
+          "live_media_checked": true,
+          "checked_at": "2026-10-25T16:46:13.956Z",
+          "milliseconds": 3418,
           "media_sequence_advanced": true,
           "sample_bytes": 65536
         }
@@ -35,8 +38,10 @@
           "resolver": "dxxw",
           "id": 141,
           "ok": true,
-          "checked_at": "2026-10-25T15:47:01.917Z",
-          "milliseconds": 5199,
+          "check_kind": "live_media_sample",
+          "live_media_checked": true,
+          "checked_at": "2026-10-25T16:46:13.943Z",
+          "milliseconds": 3346,
           "media_sequence_advanced": true,
           "sample_bytes": 65536
         }
@@ -55,8 +60,10 @@
           "resolver": "dxxw",
           "id": 146,
           "ok": true,
-          "checked_at": "2026-10-25T15:47:01.903Z",
-          "milliseconds": 5190,
+          "check_kind": "live_media_sample",
+          "live_media_checked": true,
+          "checked_at": "2026-10-25T16:46:13.955Z",
+          "milliseconds": 3356,
           "media_sequence_advanced": true,
           "sample_bytes": 65536
         }
@@ -75,23 +82,27 @@
           "resolver": "dxxw",
           "id": 197,
           "ok": true,
-          "checked_at": "2026-10-25T15:47:10.143Z",
-          "milliseconds": 8235,
+          "check_kind": "live_media_sample",
+          "live_media_checked": true,
+          "checked_at": "2026-10-25T16:46:17.314Z",
+          "milliseconds": 3369,
           "media_sequence_advanced": true,
           "sample_bytes": 65536
         },
         {
           "resolver": "zzbrtv",
           "id": 100714,
-          "ok": false,
-          "checked_at": "2026-10-25T15:47:23.876Z",
-          "stage": "official_directory",
-          "reason": "network_error",
-          "milliseconds": 21967
+          "ok": true,
+          "check_kind": "live_media_sample",
+          "live_media_checked": true,
+          "checked_at": "2026-10-25T16:46:22.055Z",
+          "milliseconds": 8110,
+          "media_sequence_advanced": true,
+          "sample_bytes": 65536
         }
       ],
       "ok": true,
-      "all_lines_ok": false,
+      "all_lines_ok": true,
       "resolution": "1920x1080; backup 1280x720",
       "resolution_evidence": "household PC decode; cloud sample does not verify resolution"
     },
@@ -103,44 +114,53 @@
         {
           "resolver": "zzbrtv",
           "id": 107447,
-          "ok": false,
-          "checked_at": "2026-10-25T15:47:23.877Z",
-          "stage": "official_directory",
-          "reason": "network_error",
-          "milliseconds": 21960
+          "ok": true,
+          "check_kind": "live_media_sample",
+          "live_media_checked": true,
+          "checked_at": "2026-10-25T16:46:22.054Z",
+          "milliseconds": 8099,
+          "media_sequence_advanced": true,
+          "sample_bytes": 65536
         }
       ],
-      "ok": false,
-      "all_lines_ok": false,
+      "ok": true,
+      "all_lines_ok": true,
       "resolution": "1280x720",
       "resolution_evidence": "household PC decode; cloud sample does not verify resolution"
     }
   ],
-  "all_checks_passed": false,
-  "limitations": "Small HTTP media samples from the runner. Not television, sound, 30-minute, or household acceptance.",
+  "all_checks_passed": true,
+  "limitations": "Direct streams: small HTTP media samples. WebView: official page response only, no current live-media verification. Prior device evidence is explicitly dated. Not current television, sound, 30-minute, or household acceptance.",
   "publication": {
-    "updated_at": "2026-10-25T23:47:23.931579+08:00",
+    "updated_at": "2026-10-26T00:47:52.941509+08:00",
     "updated": true,
     "kept_previous_files": false,
     "epg_updated": true,
-    "channel_config_kept": true,
-    "reason": "video_checks_failed; unchanged_channels_valid_guide_refreshed"
+    "channel_config_kept": false,
+    "channels_sha256": "38d7cba594910e149dbbc3995ce4a2e45236d7b6e6cc1da1afd8b37339c76cfc"
   },
   "epg": {
     "ok": true,
     "upstream": "https://raw.githubusercontent.com/mytv-android/myEPG/master/output/epg.gz",
     "exact_match_counts": {
-      "河南卫视": 89,
-      "河南都市": 29,
-      "河南民生": 27,
+      "河南卫视": 88,
+      "河南都市": 28,
+      "河南民生": 25,
       "郑州新闻综合": 0,
       "郑州都市生活": 0
     },
     "explicit_no_data_channels": [
+      "河南都市",
+      "河南民生",
       "郑州新闻综合",
       "郑州都市生活"
     ],
+    "stale_upstream_mapping_channels": [
+      "河南都市",
+      "河南民生"
+    ],
+    "programme_data_complete": false,
     "rejected_invalid_entries": 9,
-    "sha256": "b10eb1ccd48d2f09337bb3d59c19467081ba76f89238d0b70d894577b78daaeb"
+    "sha256": "5b3e7e003c608d03baf3e5836d8a587a96aaea97d9dcaa9ec9fbbd2643ffcf05"
   }
 }

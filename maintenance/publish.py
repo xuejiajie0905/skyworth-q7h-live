@@ -82,14 +82,15 @@ def guide(catalog, now):
         counts[c['name']]+=1
         if stop>now and start<now+dt.timedelta(days=1):
             fresh[c['name']]+=1
-    if any(count==0 for count in fresh.values()):
-        raise ValueError('epg_required_mapping_stale')
+    stale_mappings=[name for name,count in fresh.items() if count==0]
     placeholders=[]
     for c in channels:
-        if c['epg_upstream_id']:
+        if c['epg_upstream_id'] and c['name'] not in stale_mappings:
             continue
         placeholders.append(c['name'])
-        for day in range(-1,4):
+        # Keep valid historical entries. A mapped channel whose schedule has
+        # expired gets explicit no-data labels from today, never guessed shows.
+        for day in range(0 if c['epg_upstream_id'] else -1,4):
             start=dt.datetime.combine(now.date()+dt.timedelta(days=day),dt.time.min,TZ)
             stop=start+dt.timedelta(days=1)
             node=ET.SubElement(output,'programme',{'channel':c['name'],
@@ -104,7 +105,10 @@ def guide(catalog, now):
     if len(check.findall('channel'))!=len(channels):
         raise ValueError('epg_output_channel_mismatch')
     return compressed,{'ok':True,'upstream':EPG_URL,'exact_match_counts':counts,
-                       'explicit_no_data_channels':placeholders,'rejected_invalid_entries':rejected,
+                       'explicit_no_data_channels':placeholders,
+                       'stale_upstream_mapping_channels':stale_mappings,
+                       'programme_data_complete':not stale_mappings,
+                       'rejected_invalid_entries':rejected,
                        'sha256':hashlib.sha256(compressed).hexdigest()}
 
 
@@ -115,9 +119,12 @@ def playlist(catalog,pins,cdn=False):
     found=set()
     for c in catalog['channels']:
         for line in c['lines']:
-            resolver=pins['resolvers'][line['resolver']]
-            base=cdn_base if cdn else RAW
-            uri='javascript://'+base+resolver['git_ref']+'/'+resolver['file']+'?id='+str(line['id'])
+            if line.get('kind')=='webview':
+                uri='webview://'+line['url']
+            else:
+                resolver=pins['resolvers'][line['resolver']]
+                base=cdn_base if cdn else RAW
+                uri='javascript://'+base+resolver['git_ref']+'/'+resolver['file']+'?id='+str(line['id'])
             key=(c['name'],uri)
             if key in found:
                 raise ValueError('duplicate_channel_line')
@@ -142,7 +149,7 @@ def main():
         m3u=playlist(catalog,pins)
         cdn_m3u=playlist(catalog,pins,cdn=True)
         health['epg']=epg_status
-        if health.get('video_checks_passed'):
+        if health.get('subscription_checks_passed',health.get('video_checks_passed')):
             (ROOT/'epg.xml.gz').write_bytes(data)
             (ROOT/'channels.m3u').write_text(m3u,encoding='utf-8',newline='\n')
             (ROOT/'channels-cdn.m3u').write_text(cdn_m3u,encoding='utf-8',newline='\n')
@@ -151,7 +158,7 @@ def main():
                 'channels_sha256':hashlib.sha256(m3u.encode()).hexdigest()})
             health['all_checks_passed']=True
         else:
-            health['publication']['reason']='video_checks_failed'
+            health['publication']['reason']='subscription_checks_failed'
             health['all_checks_passed']=False
             # Guide data has its own validation gate. If the exact installed
             # channel configuration is unchanged, a runner's regional media
@@ -161,7 +168,7 @@ def main():
                 (ROOT/'epg.xml.gz').write_bytes(data)
                 health['publication'].update({'updated':True,'kept_previous_files':False,
                                                'epg_updated':True,'channel_config_kept':True,
-                                               'reason':'video_checks_failed; unchanged_channels_valid_guide_refreshed'})
+                                               'reason':'subscription_checks_failed; unchanged_channels_valid_guide_refreshed'})
     except Exception as exc:
         reason=str(exc) if isinstance(exc,ValueError) and str(exc).startswith('epg_') else type(exc).__name__
         health['epg']={'ok':False,'reason':reason}

@@ -127,6 +127,28 @@ async function checkLine(line) {
   const started = Date.now();
   let stage = 'official_directory';
   try {
+    if (line.kind === 'webview') {
+      stage = 'official_web_page';
+      const url = new URL(line.url);
+      if (url.protocol !== 'https:' || url.hostname !== 'tv.cctv.com' ||
+          !/^\/live\/cctv(1|4|13)\/$/.test(url.pathname) || url.search || url.hash || url.username || url.password)
+        throw new CheckError('unreviewed_web_page');
+      const proof = line.device_validation;
+      const expectedName = 'CCTV-' + url.pathname.match(/^\/live\/cctv(1|4|13)\/$/)[1];
+      if (!proof || proof.channel !== expectedName ||
+          !Number.isFinite(proof.observed_seconds) || proof.observed_seconds < 600 ||
+          proof.frame_continuity_gate !== true || proof.screenshots_reviewed !== true ||
+          proof.human_sound_confirmed !== true || proof.startup_target_gate !== true ||
+          proof.exit_resources_gate !== true || !Number.isFinite(Date.parse(proof.verified_at)) ||
+          Date.parse(proof.verified_at) > Date.now())
+        throw new CheckError('webview_device_acceptance_missing');
+      const page = await get(line.url, { 'User-Agent': 'Mozilla/5.0' });
+      if (new URL(page.url).hostname !== 'tv.cctv.com' || !page.data.toString('utf8').includes('CCTV'))
+        throw new CheckError('official_web_page_changed');
+      return { kind: 'webview', url: line.url, ok: true, check_kind: 'official_web_page_only',
+        live_media_checked: false, checked_at: new Date().toISOString(),
+        previous_device_acceptance_at: proof.verified_at, milliseconds: Date.now() - started };
+    }
     const resolvers = { dxxw, zzbrtv, cctvnews };
     if (!resolvers[line.resolver]) throw new CheckError('unknown_resolver');
     const media = await resolvers[line.resolver](line.id);
@@ -146,10 +168,10 @@ async function checkLine(line) {
       if (second.seq > first.seq) { advanced = true; break; }
     }
     if (!advanced) throw new CheckError('playlist_not_advancing');
-    return { resolver: line.resolver, id: line.id, ok: true, checked_at: new Date().toISOString(),
+    return { resolver: line.resolver, id: line.id, ok: true, check_kind: 'live_media_sample', live_media_checked: true, checked_at: new Date().toISOString(),
       milliseconds: Date.now() - started, media_sequence_advanced: true, sample_bytes: segment.length };
   } catch (error) {
-    return { resolver: line.resolver, id: line.id, ok: false, checked_at: new Date().toISOString(),
+    return { resolver: line.resolver, id: line.id, kind: line.kind, ok: false, checked_at: new Date().toISOString(),
       stage, reason: error instanceof CheckError ? error.code : 'unexpected_api_format', milliseconds: Date.now() - started };
   }
 }
@@ -171,15 +193,20 @@ async function worker() {
     const lines = codeIntegrity && schemaValid ? await Promise.all(c.lines.map(checkLine)) : [];
     channels.push({ id: c.id, name: c.name, required: c.required, lines,
       ok: lines.some(line => line.ok), all_lines_ok: !!lines.length && lines.every(line => line.ok),
-      resolution: c.resolution, resolution_evidence: 'household PC decode; cloud sample does not verify resolution' });
-    console.log(c.name + ': ' + (lines.some(x => x.ok) ? 'sample passed' : 'check failed'));
+      resolution: c.resolution,
+      resolution_evidence: c.resolution_evidence || (c.lines.every(line => line.kind === 'webview')
+        ? 'not measured on device' : 'household PC decode; cloud sample does not verify resolution') });
+    console.log(c.name + ': ' + (lines.some(x => x.ok) ? 'endpoint check passed' : 'check failed'));
   }
 }
 await Promise.all([worker(), worker(), worker()]);
 channels.sort((a, b) => ids.indexOf(a.id) - ids.indexOf(b.id));
 const health = { schema_version: 1, checked_at: new Date().toISOString(), code_integrity: codeIntegrity,
   check_environment: process.env.GITHUB_ACTIONS === 'true' ? 'github_actions' : 'local_cli',
-  catalog_valid: schemaValid, video_checks_passed: codeIntegrity && schemaValid && channels.filter(c => c.required).every(c => c.ok),
+  catalog_valid: schemaValid,
+  subscription_checks_passed: codeIntegrity && schemaValid && channels.filter(c => c.required).every(c => c.ok),
+  video_checks_passed: codeIntegrity && schemaValid && channels.filter(c => c.required)
+    .every(c => c.lines.some(line => line.ok && line.check_kind === 'live_media_sample')),
   channels, all_checks_passed: false,
-  limitations: 'Small HTTP media samples from the runner. Not television, sound, 30-minute, or household acceptance.' };
+  limitations: 'Direct streams: small HTTP media samples. WebView: official page response only, no current live-media verification. Prior device evidence is explicitly dated. Not current television, sound, 30-minute, or household acceptance.' };
 await writeFile(path.join(root, 'health.json'), JSON.stringify(health, null, 2) + '\n');

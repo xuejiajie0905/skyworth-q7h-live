@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-10-25T15:12:11.299Z",
+  "checked_at": "2026-10-25T15:14:58.100Z",
   "code_integrity": true,
   "catalog_valid": true,
-  "video_checks_passed": true,
+  "video_checks_passed": false,
   "channels": [
     {
       "id": "henan-satellite",
@@ -14,8 +14,8 @@
           "resolver": "dxxw",
           "id": 145,
           "ok": true,
-          "checked_at": "2026-10-25T15:12:06.199Z",
-          "milliseconds": 6508,
+          "checked_at": "2026-10-25T15:14:36.190Z",
+          "milliseconds": 6146,
           "media_sequence_advanced": true,
           "sample_bytes": 65536
         }
@@ -34,8 +34,8 @@
           "resolver": "dxxw",
           "id": 141,
           "ok": true,
-          "checked_at": "2026-10-25T15:12:03.199Z",
-          "milliseconds": 3440,
+          "checked_at": "2026-10-25T15:14:36.165Z",
+          "milliseconds": 6068,
           "media_sequence_advanced": true,
           "sample_bytes": 65536
         }
@@ -54,8 +54,8 @@
           "resolver": "dxxw",
           "id": 146,
           "ok": true,
-          "checked_at": "2026-10-25T15:12:03.195Z",
-          "milliseconds": 3437,
+          "checked_at": "2026-10-25T15:14:36.176Z",
+          "milliseconds": 6074,
           "media_sequence_advanced": true,
           "sample_bytes": 65536
         }
@@ -74,23 +74,22 @@
           "resolver": "dxxw",
           "id": 197,
           "ok": true,
-          "checked_at": "2026-10-25T15:12:09.472Z",
-          "milliseconds": 6276,
+          "checked_at": "2026-10-25T15:14:41.247Z",
+          "milliseconds": 5077,
           "media_sequence_advanced": true,
           "sample_bytes": 65536
         },
         {
           "resolver": "zzbrtv",
           "id": 100714,
-          "ok": true,
-          "checked_at": "2026-10-25T15:12:11.298Z",
-          "milliseconds": 8101,
-          "media_sequence_advanced": true,
-          "sample_bytes": 65536
+          "ok": false,
+          "checked_at": "2026-10-25T15:14:58.100Z",
+          "reason": "network_error",
+          "milliseconds": 21929
         }
       ],
       "ok": true,
-      "all_lines_ok": true,
+      "all_lines_ok": false,
       "resolution": "1920x1080; backup 1280x720",
       "resolution_evidence": "household PC decode; cloud sample does not verify resolution"
     },
@@ -102,26 +101,25 @@
         {
           "resolver": "zzbrtv",
           "id": 107447,
-          "ok": true,
-          "checked_at": "2026-10-25T15:12:11.299Z",
-          "milliseconds": 8100,
-          "media_sequence_advanced": true,
-          "sample_bytes": 65536
+          "ok": false,
+          "checked_at": "2026-10-25T15:14:58.100Z",
+          "reason": "network_error",
+          "milliseconds": 21924
         }
       ],
-      "ok": true,
-      "all_lines_ok": true,
+      "ok": false,
+      "all_lines_ok": false,
       "resolution": "1280x720",
       "resolution_evidence": "household PC decode; cloud sample does not verify resolution"
     }
   ],
-  "all_checks_passed": true,
+  "all_checks_passed": false,
   "limitations": "Small HTTP media samples from the runner. Not television, sound, 30-minute, or household acceptance.",
   "publication": {
-    "updated_at": "2026-10-25T23:12:31.664315+08:00",
-    "updated": true,
-    "kept_previous_files": false,
-    "channels_sha256": "42ce6365159b5a8de2e3083f4fae355b7a374f0a5bd5f5cda8ed9a68fc1a8075"
+    "updated_at": "2026-10-25T23:14:58.181389+08:00",
+    "updated": false,
+    "kept_previous_files": true,
+    "reason": "video_checks_failed"
   },
   "epg": {
     "ok": true,
@@ -138,6 +136,6 @@
       "郑州都市生活"
     ],
     "rejected_invalid_entries": 9,
-    "sha256": "b41621f9ba12b0d7e1e6d492f43ba0fe8968995ff3f200a7f9873a27bc3860e4"
+    "sha256": "cf5bc6efffa59c5ebe30b20eae1068504e1d124909f140aa58d6f3a8773a542e"
   }
 }

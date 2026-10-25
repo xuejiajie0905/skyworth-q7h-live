@@ -108,13 +108,16 @@ def guide(catalog, now):
                        'sha256':hashlib.sha256(compressed).hexdigest()}
 
 
-def playlist(catalog,pins):
-    lines=['#EXTM3U x-tvg-url="'+RAW+'main/epg.xml.gz"']
+def playlist(catalog,pins,cdn=False):
+    cdn_base='https://cdn.jsdelivr.net/gh/xuejiajie0905/skyworth-q7h-live@'
+    epg=(cdn_base+'main/epg.xml.gz') if cdn else RAW+'main/epg.xml.gz'
+    lines=['#EXTM3U x-tvg-url="'+epg+'"']
     found=set()
     for c in catalog['channels']:
         for line in c['lines']:
             resolver=pins['resolvers'][line['resolver']]
-            uri='javascript://'+RAW+resolver['git_ref']+'/'+resolver['file']+'?id='+str(line['id'])
+            base=cdn_base if cdn else RAW
+            uri='javascript://'+base+resolver['git_ref']+'/'+resolver['file']+'?id='+str(line['id'])
             key=(c['name'],uri)
             if key in found:
                 raise ValueError('duplicate_channel_line')
@@ -137,10 +140,12 @@ def main():
     try:
         data,epg_status=guide(catalog,now)
         m3u=playlist(catalog,pins)
+        cdn_m3u=playlist(catalog,pins,cdn=True)
         health['epg']=epg_status
         if health.get('video_checks_passed'):
             (ROOT/'epg.xml.gz').write_bytes(data)
             (ROOT/'channels.m3u').write_text(m3u,encoding='utf-8',newline='\n')
+            (ROOT/'channels-cdn.m3u').write_text(cdn_m3u,encoding='utf-8',newline='\n')
             health['publication'].update({'updated':True,'kept_previous_files':False,
                 'epg_updated':True,'channel_config_kept':False,
                 'channels_sha256':hashlib.sha256(m3u.encode()).hexdigest()})

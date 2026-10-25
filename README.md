@@ -19,6 +19,7 @@
 ## 已发布接口
 
 - [channels.m3u](https://raw.githubusercontent.com/xuejiajie0905/skyworth-q7h-live/main/channels.m3u)：当前五个本地频道；同名频道的不同线路由播放器合并。
+- [channels-cdn.m3u](https://xuejiajie0905.github.io/skyworth-q7h-live/channels-cdn.m3u)：GitHub Pages 发布、jsDelivr 固定提交脚本的分发镜像；用于电视直连原始文件超时的场景。镜像与原订阅由同一生成器构建，镜像并非视频源。
 - [epg.xml.gz](https://raw.githubusercontent.com/xuejiajie0905/skyworth-q7h-live/main/epg.xml.gz)：北京时间 XMLTV。河南三台采用 `mytv-android/myEPG` 的精确频道映射，过滤时间倒置、过期和重复条目。郑州两台目前只显示“暂无节目单”占位提示，不虚构节目名称。
 - [health.json](health.json)：检查时间、每条线路状态及节目单状态。云端抽样结果不能代替家庭网络和电视实播验收。
 - [catalog.json](catalog.json)、[resolvers.json](resolvers.json)：已选频道、固定脚本提交和 SHA-256。

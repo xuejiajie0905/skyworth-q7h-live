@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-10-26T01:06:56.705Z",
+  "checked_at": "2026-10-26T03:07:00.846Z",
   "code_integrity": true,
   "check_environment": "github_actions",
   "catalog_valid": true,
@@ -18,8 +18,8 @@
           "ok": true,
           "check_kind": "live_media_sample",
           "live_media_checked": true,
-          "checked_at": "2026-10-26T01:06:31.727Z",
-          "milliseconds": 5267,
+          "checked_at": "2026-10-26T03:06:39.886Z",
+          "milliseconds": 8162,
           "media_sequence_advanced": true,
           "sample_bytes": 65536
         }
@@ -40,8 +40,8 @@
           "ok": true,
           "check_kind": "live_media_sample",
           "live_media_checked": true,
-          "checked_at": "2026-10-26T01:06:34.753Z",
-          "milliseconds": 8227,
+          "checked_at": "2026-10-26T03:06:36.863Z",
+          "milliseconds": 5091,
           "media_sequence_advanced": true,
           "sample_bytes": 65536
         }
@@ -62,8 +62,8 @@
           "ok": true,
           "check_kind": "live_media_sample",
           "live_media_checked": true,
-          "checked_at": "2026-10-26T01:06:37.736Z",
-          "milliseconds": 11210,
+          "checked_at": "2026-10-26T03:06:38.880Z",
+          "milliseconds": 7104,
           "media_sequence_advanced": true,
           "sample_bytes": 65536
         }
@@ -84,8 +84,8 @@
           "ok": true,
           "check_kind": "live_media_sample",
           "live_media_checked": true,
-          "checked_at": "2026-10-26T01:06:38.136Z",
-          "milliseconds": 6403,
+          "checked_at": "2026-10-26T03:06:44.657Z",
+          "milliseconds": 7789,
           "media_sequence_advanced": true,
           "sample_bytes": 65536
         },
@@ -93,10 +93,10 @@
           "resolver": "zzbrtv",
           "id": 100714,
           "ok": false,
-          "checked_at": "2026-10-26T01:06:53.706Z",
+          "checked_at": "2026-10-26T03:06:58.848Z",
           "stage": "official_directory",
           "reason": "network_error",
-          "milliseconds": 21972
+          "milliseconds": 21978
         }
       ],
       "ok": true,
@@ -113,10 +113,10 @@
           "resolver": "zzbrtv",
           "id": 107447,
           "ok": false,
-          "checked_at": "2026-10-26T01:06:56.705Z",
+          "checked_at": "2026-10-26T03:07:00.846Z",
           "stage": "official_directory",
           "reason": "network_error",
-          "milliseconds": 21951
+          "milliseconds": 21965
         }
       ],
       "ok": false,
@@ -126,9 +126,9 @@
     }
   ],
   "all_checks_passed": false,
-  "limitations": "Direct streams: small HTTP media samples. WebView: official page response only, no current live-media verification. Prior device evidence is explicitly dated. Not current television, sound, sustained-viewing, or household acceptance.",
+  "limitations": "HLS: small HTTP media samples. RTMP: bounded FFmpeg audio/video decode. WebView: official page response only, no current live-media verification. Prior device evidence is explicitly dated. Not current television, sound, sustained-viewing, or household acceptance.",
   "publication": {
-    "updated_at": "2026-10-26T09:06:56.787275+08:00",
+    "updated_at": "2026-10-26T11:07:00.939243+08:00",
     "updated": true,
     "kept_previous_files": false,
     "epg_updated": true,
@@ -139,9 +139,9 @@
     "ok": true,
     "upstream": "https://raw.githubusercontent.com/mytv-android/myEPG/master/output/epg.gz",
     "exact_match_counts": {
-      "河南卫视": 71,
-      "河南都市": 47,
-      "河南民生": 41,
+      "河南卫视": 68,
+      "河南都市": 45,
+      "河南民生": 38,
       "郑州新闻综合": 0,
       "郑州都市生活": 0
     },
@@ -150,10 +150,9 @@
       "郑州都市生活"
     ],
     "stale_upstream_mapping_channels": [],
+    "mapped_programme_data_complete": true,
     "programme_data_complete": false,
     "rejected_invalid_entries": 9,
-    "sha256": "74e8036a6d4470a1791f86f102a17cef4a98ac848d98f0ebe485198722f1b891",
-    "mapped_programme_data_complete": true,
-    "completeness_label_corrected_at": "2026-10-26T10:32:53.169897+08:00"
+    "sha256": "b2b05f5d2c366fa179806c7461fdf261e23b84014959b17f1b5d72bf7ac7652f"
   }
 }

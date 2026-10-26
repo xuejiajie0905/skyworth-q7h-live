@@ -150,8 +150,10 @@
       "郑州都市生活"
     ],
     "stale_upstream_mapping_channels": [],
-    "programme_data_complete": true,
+    "programme_data_complete": false,
     "rejected_invalid_entries": 9,
-    "sha256": "74e8036a6d4470a1791f86f102a17cef4a98ac848d98f0ebe485198722f1b891"
+    "sha256": "74e8036a6d4470a1791f86f102a17cef4a98ac848d98f0ebe485198722f1b891",
+    "mapped_programme_data_complete": true,
+    "completeness_label_corrected_at": "2026-10-26T10:32:53.169897+08:00"
   }
 }

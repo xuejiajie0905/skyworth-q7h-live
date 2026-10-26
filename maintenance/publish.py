@@ -107,7 +107,8 @@ def guide(catalog, now):
     return compressed,{'ok':True,'upstream':EPG_URL,'exact_match_counts':counts,
                        'explicit_no_data_channels':placeholders,
                        'stale_upstream_mapping_channels':stale_mappings,
-                       'programme_data_complete':not stale_mappings,
+                       'mapped_programme_data_complete':not stale_mappings,
+                       'programme_data_complete':not placeholders,
                        'rejected_invalid_entries':rejected,
                        'sha256':hashlib.sha256(compressed).hexdigest()}
 
@@ -121,6 +122,11 @@ def playlist(catalog,pins,cdn=False):
         for line in c['lines']:
             if line.get('kind')=='webview':
                 uri='webview://'+line['url']
+            elif line.get('kind')=='rtmp':
+                if (line.get('resolver')!='zzbrtv_rtmp' or line.get('id')!=107447
+                    or line.get('url')!='rtmp://tv.zzbrtv.cn:1935/channellive/dspd'):
+                    raise ValueError('unreviewed_rtmp_line')
+                uri=line['url']
             else:
                 resolver=pins['resolvers'][line['resolver']]
                 base=cdn_base if cdn else RAW

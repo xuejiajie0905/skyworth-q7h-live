@@ -3,6 +3,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { createHash, createHmac, publicEncrypt, constants, createDecipheriv } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { sampleOfficialRtmp } from './rtmp.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const catalog = JSON.parse(await readFile(path.join(root, 'catalog.json'), 'utf8'));
@@ -79,6 +80,16 @@ async function zzbrtv(id) {
   return { url, headers: { 'User-Agent': 'Mozilla/5.0', Referer: 'https://m.zzbrtv.cn/' } };
 }
 
+async function zzbrtvRtmp(id) {
+  if (Number(id) !== 107447) throw new CheckError('unreviewed_channel');
+  const headers = { Accept: 'application/json,*/*', Referer: 'https://m.zzbrtv.cn/',
+    'X-DFSX-UIVersion': '1.0', 'X-DFSX-Appid': 'huimian' };
+  const rows = await json('https://api.zzbrtv.cn/cms/public/lives/107447', headers);
+  const url = rows.find(row => Number(row.id) === 107447)?.rtmp_url;
+  if (url !== 'rtmp://tv.zzbrtv.cn:1935/channellive/dspd') throw new CheckError('origin_changed');
+  return { url };
+}
+
 async function cctvnews(id) {
   const ids = { cctv1: '11200132825562653886', cctv4: '10620168294224708952', cctv13: '16265686808730585228' };
   if (!ids[id]) throw new CheckError('unreviewed_channel');
@@ -149,9 +160,20 @@ async function checkLine(line) {
         live_media_checked: false, checked_at: new Date().toISOString(),
         previous_device_acceptance_at: proof.verified_at, milliseconds: Date.now() - started };
     }
-    const resolvers = { dxxw, zzbrtv, cctvnews };
+    const resolvers = { dxxw, zzbrtv, zzbrtv_rtmp: zzbrtvRtmp, cctvnews };
     if (!resolvers[line.resolver]) throw new CheckError('unknown_resolver');
     const media = await resolvers[line.resolver](line.id);
+    if (line.resolver === 'zzbrtv_rtmp') {
+      if (line.kind !== 'rtmp' || line.url !== media.url) throw new CheckError('rtmp_catalog_mismatch');
+      stage = 'rtmp_decode_sample';
+      const sample = await sampleOfficialRtmp(media.url);
+      if (!sample.ok) throw new CheckError(sample.reason);
+      return { resolver: line.resolver, id: line.id, ok: true,
+        check_kind: 'live_rtmp_decode_sample', live_media_checked: true,
+        checked_at: new Date().toISOString(), milliseconds: Date.now() - started,
+        decoded_media_seconds: sample.decoded_media_seconds, video_frames: sample.video_frames,
+        audio_and_video_required: true };
+    }
     stage = 'live_manifest';
     const first = await mediaManifest(media.url, media.headers);
     stage = 'media_sample';
@@ -206,7 +228,7 @@ const health = { schema_version: 1, checked_at: new Date().toISOString(), code_i
   catalog_valid: schemaValid,
   subscription_checks_passed: codeIntegrity && schemaValid && channels.filter(c => c.required).every(c => c.ok),
   video_checks_passed: codeIntegrity && schemaValid && channels.filter(c => c.required)
-    .every(c => c.lines.some(line => line.ok && line.check_kind === 'live_media_sample')),
+    .every(c => c.lines.some(line => line.ok && line.live_media_checked === true)),
   channels, all_checks_passed: false,
-  limitations: 'Direct streams: small HTTP media samples. WebView: official page response only, no current live-media verification. Prior device evidence is explicitly dated. Not current television, sound, sustained-viewing, or household acceptance.' };
+  limitations: 'HLS: small HTTP media samples. RTMP: bounded FFmpeg audio/video decode. WebView: official page response only, no current live-media verification. Prior device evidence is explicitly dated. Not current television, sound, sustained-viewing, or household acceptance.' };
 await writeFile(path.join(root, 'health.json'), JSON.stringify(health, null, 2) + '\n');

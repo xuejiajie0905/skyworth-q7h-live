@@ -22,11 +22,16 @@ concurrency:
 
 jobs:
   check:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 8
     steps:
       - name: Read this repository
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4, verified 2026-10-25
+      - name: Install distribution decoder for bounded RTMP samples
+        continue-on-error: true # Missing FFmpeg is reported by the channel checker.
+        run: |
+          sudo apt-get -qq update
+          sudo apt-get install --no-install-recommends -y ffmpeg
       - name: Check pinned code and live media samples
         run: node maintenance/check.mjs
       - name: Filter XMLTV and retain last good files on failure

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-11-14T17:00:56.395Z",
+  "checked_at": "2026-11-15T02:35:31.153Z",
   "code_integrity": true,
   "check_environment": "github_actions",
   "catalog_valid": true,
@@ -18,8 +18,8 @@
           "ok": true,
           "check_kind": "live_media_sample",
           "live_media_checked": true,
-          "checked_at": "2026-11-14T17:00:34.408Z",
-          "milliseconds": 6297,
+          "checked_at": "2026-11-15T02:35:09.179Z",
+          "milliseconds": 6980,
           "media_sequence_advanced": true,
           "sample_bytes": 65536
         }
@@ -40,8 +40,8 @@
           "ok": true,
           "check_kind": "live_media_sample",
           "live_media_checked": true,
-          "checked_at": "2026-11-14T17:00:34.888Z",
-          "milliseconds": 6489,
+          "checked_at": "2026-11-15T02:35:12.172Z",
+          "milliseconds": 9882,
           "media_sequence_advanced": true,
           "sample_bytes": 65536
         }
@@ -62,8 +62,8 @@
           "ok": true,
           "check_kind": "live_media_sample",
           "live_media_checked": true,
-          "checked_at": "2026-11-14T17:00:37.519Z",
-          "milliseconds": 9120,
+          "checked_at": "2026-11-15T02:35:09.171Z",
+          "milliseconds": 6886,
           "media_sequence_advanced": true,
           "sample_bytes": 65536
         }
@@ -84,8 +84,8 @@
           "ok": true,
           "check_kind": "live_media_sample",
           "live_media_checked": true,
-          "checked_at": "2026-11-14T17:00:39.777Z",
-          "milliseconds": 5293,
+          "checked_at": "2026-11-15T02:35:13.999Z",
+          "milliseconds": 4823,
           "media_sequence_advanced": true,
           "sample_bytes": 65536
         },
@@ -93,10 +93,10 @@
           "resolver": "zzbrtv",
           "id": 100714,
           "ok": false,
-          "checked_at": "2026-11-14T17:00:56.395Z",
+          "checked_at": "2026-11-15T02:35:31.152Z",
           "stage": "official_directory",
           "reason": "network_error",
-          "milliseconds": 21909
+          "milliseconds": 21975
         }
       ],
       "ok": true,
@@ -113,10 +113,10 @@
           "resolver": "zzbrtv",
           "id": 107447,
           "ok": false,
-          "checked_at": "2026-11-14T17:00:56.395Z",
+          "checked_at": "2026-11-15T02:35:31.153Z",
           "stage": "official_directory",
           "reason": "network_error",
-          "milliseconds": 21507
+          "milliseconds": 21974
         }
       ],
       "ok": false,
@@ -128,7 +128,7 @@
   "all_checks_passed": false,
   "limitations": "HLS: small HTTP media samples. RTMP: bounded FFmpeg audio/video decode. WebView: official page response only, no current live-media verification. Prior device evidence is explicitly dated. Not current television, sound, sustained-viewing, or household acceptance.",
   "publication": {
-    "updated_at": "2026-11-15T01:00:56.464917+08:00",
+    "updated_at": "2026-11-15T10:35:31.220691+08:00",
     "updated": true,
     "kept_previous_files": false,
     "epg_updated": true,
@@ -139,25 +139,20 @@
     "ok": true,
     "upstream": "https://raw.githubusercontent.com/mytv-android/myEPG/master/output/epg.gz",
     "exact_match_counts": {
-      "河南卫视": 100,
-      "河南都市": 27,
-      "河南民生": 24,
+      "河南卫视": 80,
+      "河南都市": 44,
+      "河南民生": 37,
       "郑州新闻综合": 0,
       "郑州都市生活": 0
     },
     "explicit_no_data_channels": [
-      "河南都市",
-      "河南民生",
       "郑州新闻综合",
       "郑州都市生活"
     ],
-    "stale_upstream_mapping_channels": [
-      "河南都市",
-      "河南民生"
-    ],
-    "mapped_programme_data_complete": false,
+    "stale_upstream_mapping_channels": [],
+    "mapped_programme_data_complete": true,
     "programme_data_complete": false,
     "rejected_invalid_entries": 9,
-    "sha256": "4e4605d7df689f44ca092f70620e655ab456aa5ba13732db284b05bd84b4c9f5"
+    "sha256": "fc6cdf977c3db6b2ad9c2dd3f45b575275fc1d039bb7622b561e213ba8d1c2bb"
   }
 }
